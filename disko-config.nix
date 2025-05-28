@@ -38,11 +38,6 @@
                     name = "home";
                     mountpoint = "/home";
                   };
-
-                  "@var" = {
-                    name = "var";
-                    mountpoint = "/var";
-                  };
                 };
               };
             };
