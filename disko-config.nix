@@ -14,8 +14,9 @@
               content = {
                 type = "filesystem";
                 format = "vfat";
+                label = "EFI";
                 mountpoint = "/boot/efi";
-                options = [ "umask=0077" ];
+                mountOptions = [ "umask=0077" ];
               };
             };
 
@@ -28,7 +29,9 @@
             root = {
               size = "100%";
               content = {
-                type = "btrfs";
+                type = "filesystem";
+                format = "btrfs";
+                label = "NIXROOT";
                 mountpoint = "/";
                 subvolumes = {
                   "@" = {
@@ -46,7 +49,7 @@
                     type = "subvolume";
                   };
                 };
-                options = [ "compress=zstd" "discard=async" ];
+                mountOptions = [ "compress=zstd" "discard=async" ];
               };
             };
           };
