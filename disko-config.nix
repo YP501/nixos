@@ -16,7 +16,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot/efi";
-                options = [ "umask=0077" ];
+                mountOptions = [ "umask=0077" ];
               };
             };
 
@@ -28,6 +28,22 @@
                 extraArgs = [ "-f" ];
                 mountpoint = "/";
                 mountOptions = [ "compress=zstd" "noatime" ];
+                subvolumes = {
+                  "@" = {
+                    name = "root";
+                    mountpoint = "/";
+                  };
+
+                  "@home" = {
+                    name = "home";
+                    mountpoint = "/home";
+                  };
+
+                  "@var" = {
+                    name = "var";
+                    mountpoint = "/var";
+                  };
+                }
               };
             };
           };
