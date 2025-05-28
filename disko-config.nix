@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/nvme0n1";
+        device = "/dev/device-here";
         content = {
           type = "gpt";
           partitions = {
@@ -43,7 +43,7 @@
                     name = "var";
                     mountpoint = "/var";
                   };
-                }
+                };
               };
             };
           };

@@ -1,3 +1,5 @@
+{ config, pkgs, ... }:
+
 {
   # Plasma 6 on Wayland
   services.xserver.enable = false;

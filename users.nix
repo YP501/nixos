@@ -1,3 +1,5 @@
+{ config, pkgs, ... }:
+
 {
   users.users.yp = {
     isNormalUser = true;
