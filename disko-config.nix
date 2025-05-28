@@ -8,7 +8,7 @@
           type = "gpt";
           partitions = {
 
-            esp = {
+            ESP = {
               size = "512MiB";
               type = "EF00";
               content = {
@@ -16,17 +16,13 @@
                 format = "vfat";
                 mountpoint = "/boot/efi";
                 options = [ "umask=0077" ];
-                label = "ESP";
               };
             };
 
             swap = {
               size = "32GiB";
               type = "8200";
-              content = {
-                type = "swap";
-                label = "SWAP";
-              };
+              content = { type = "swap"; };
             };
 
             root = {
@@ -34,24 +30,20 @@
               content = {
                 type = "btrfs";
                 mountpoint = "/";
-                label = "NIXOS"; # Label for the BTRFS volume
                 subvolumes = {
                   "@" = {
                     mountpoint = "/";
                     type = "subvolume";
-                    label = "root";
                   };
 
                   "@home" = {
                     mountpoint = "/home";
                     type = "subvolume";
-                    label = "home";
                   };
 
                   "@var" = {
                     mountpoint = "/var";
                     type = "subvolume";
-                    label = "var";
                   };
                 };
                 options = [ "compress=zstd" "discard=async" ];
