@@ -3,6 +3,10 @@
 {
   imports = [
     ./hardware-configuration.nix
+    "${
+      builtins.fetchTarball
+      "https://github.com/nix-community/disko/archive/master.tar.gz"
+    }/module.nix"
     ./disko-config.nix
     ./bootloader.nix
     ./networking.nix
