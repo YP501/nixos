@@ -3,7 +3,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/device-here";
+        device = "/dev/<device-here>";
         content = {
           type = "gpt";
           partitions = {
@@ -26,18 +26,12 @@
               content = {
                 type = "btrfs";
                 extraArgs = [ "-f" ];
-                mountpoint = "/";
+                # mountpoint = "/";
                 mountOptions = [ "compress=zstd" "noatime" ];
                 subvolumes = {
-                  "@" = {
-                    name = "root";
-                    mountpoint = "/";
-                  };
+                  "@root" = { mountpoint = "/"; };
 
-                  "@home" = {
-                    name = "home";
-                    mountpoint = "/home";
-                  };
+                  "@home" = { mountpoint = "/home"; };
                 };
               };
             };
