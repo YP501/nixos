@@ -5,5 +5,6 @@
     isNormalUser = true;
     description = "YP501";
     extraGroups = [ "wheel" "networkmanager" ];
+    initialPassword = "nixos";
   };
 }

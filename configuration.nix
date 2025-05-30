@@ -10,8 +10,8 @@
     ./locale.nix
     ./desktop.nix
     ./users.nix
-    ./programs.nix
-    ./hardware.nix
+    ./applications.nix
+    ./drivers.nix
   ];
 
   system.stateVersion = "25.05";
