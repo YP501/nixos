@@ -1,38 +1,45 @@
 {
   disko.devices = {
-    disk = {
-      main = {
-        type = "disk";
-        device = "/dev/<device-here>";
-        content = {
-          type = "gpt";
-          partitions = {
-            ESP = {
-              name = "ESP";
-              start = "1M";
-              end = "512M";
-              type = "EF00";
-              content = {
-                type = "filesystem";
-                format = "vfat";
-                mountpoint = "/boot/efi";
-                mountOptions = [ "umask=0077" ];
-              };
+    NIXOS = {
+      type = "disk";
+      device = "/dev/<device-here>";
+      content = {
+        type = "gpt";
+        partitions = {
+          ESP = {
+            name = "ESP";
+            size = "512MiB";
+            type = "EF00";
+            content = {
+              type = "filesystem";
+              format = "vfat";
+              mountpoint = "/boot/efi";
+              mountOptions = [ "umask=0077" ];
             };
+          };
 
-            root = {
-              name = "NIXROOT";
-              size = "100%";
-              content = {
-                type = "btrfs";
-                extraArgs = [ "-f" ];
-                # mountpoint = "/";
-                mountOptions = [ "compress=zstd" "noatime" ];
-                subvolumes = {
-                  "@root" = { mountpoint = "/"; };
+          swap = {
+            name = "swap";
+            size = "32768MiB"; # 32 GiB
+            content = {
+              type = "swap";
+              discardPolicy = "both";
+              resumeDevice = true;
+              priority = 99;
+            };
+          };
 
-                  "@home" = { mountpoint = "/home"; };
-                };
+          root = {
+            name = "root";
+            size = "100%";
+            content = {
+              type = "btrfs";
+              extraArgs = [ "-f" ];
+              # mountpoint = "/";
+              mountOptions = [ "compress=zstd" "noatime" ];
+              subvolumes = {
+                "@root" = { mountpoint = "/"; };
+                "@home" = { mountpoint = "/home"; };
               };
             };
           };
